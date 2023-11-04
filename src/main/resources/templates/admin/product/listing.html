@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    div.inline {
+        color: black;
+        float: none;
+        padding: 5px 5px;
+        display: inline-block;
+    }
+    div.inline a.active {
+        background-color: #FBD603;
+        border:1px solid darkred;
+    }
+
+</style>
+<head>
+    <meta charset="UTF-8">
+    <title>products with pagination</title>
+    <meta charset="UTF-8">
+    <title>products</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<h1 class="text-center">LIST OF PRODUCTS</h1>
+<table class="table table-striped table-hover table-bordered">
+    <thead class="bg-gradient">
+    <tr>
+        <th>ID</th>
+        <th>NAME</th>
+        <th>DESCRIPTION</th>
+        <th>UNIT</th>
+        <th>MANUFACTURER</th>
+        <th>STATUS</th>
+        <th colspan="2">
+            <a type="button" class="btn btn-success" href="/show-add-form">New Product</a>
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product, iStat : ${productPage.content}">
+        <td th:text="${product.product_id}"></td>
+        <td th:text="${product.name}"></td>
+        <td th:text="${product.description}"></td>
+        <td th:text="${product.unit}"></td>
+        <td th:text="${product.manufacturer}"></td>
+        <td th:text="${product.status}"></td>
+        <td><a class="btn btn-primary" th:href="@{products/show-edit-form/{id}(id=${product.product_id})}">Edit</a></td>
+        <td><a class="btn btn-danger" th:href="@{products/delete/{id}(id=${product.product_id})}">Delete</a></td>
+    </tr>
+    </tbody>
+</table>
+<div class="inline" th:if="${productPage.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">
+    <a th:href="@{/products(size=${productPage.size}, page=${pageNumber})}"
+       th:text="${pageNumber}"
+       th:class="${pageNumber==productPage.number + 1} ? active"></a>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Candidates</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
+    <style>
+        .x{
+            position: fixed;
+            padding: 1.5rem;
+            margin-right: 10px;
+            margin-left: 0;
+            border-width: 1px;
+            border-top-left-radius: .25rem;
+            border-top-right-radius: .25rem;
+        }
+    </style>
+</head>
+<body>
+<h1 th:align="center">ADD NEW PRODUCT</h1>
+<div class="x">
+    <form action="#" th:action="@{/products/add}" th:object="${product}" method="post">
+        <div class="row mb-3">
+            <label for="name" class="col-sm-3 ">Name</label>
+            <div class="col-12">
+                <input type="text" class="form-control" id="name" th:field="*{name}">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="description" class="col-sm-5">Description</label>
+            <div class="col-12">
+                <textarea rows="6" cols="20" class="form-control" id="description" th:field="*{description}"}></textarea>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="unit" class="col-sm-10 ">Unit</label>
+            <div class="col-12">
+                <input type="text" class="form-control" id="unit" th:field="*{unit}">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="inputManu" class="col-sm-10 ">Manufacturer</label>
+            <div class="col-12">
+                <input type="text" class="form-control" id="inputManu" th:field="*{manufacturer}">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="selectStatus" class="col-sm-10 ">Status</label>
+            <div class="col-12">
+<!--                <input type="text" class="form-control" id="inputStatus" th:field="*{status}">-->
+                <select id="selectStatus" th:field="*{status}">
+                    <option th:each="st : ${T(vn.edu.iuh.fit.backend.enums.ProductStatus).values()}"
+                            th:value="${st}" th:text="${st}"></option>
+                </select>
+            </div>
+        </div>
+
+        <br/>
+        <div class="d-grid gap-1 col-3 mx-auto">
+            <input class="btn btn-primary" type="submit" value="Add Product">
+        </div>
+    </form>
+</div>
+</body>
+</html>
