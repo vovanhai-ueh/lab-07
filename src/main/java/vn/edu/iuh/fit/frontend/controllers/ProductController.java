@@ -1,5 +1,6 @@
 package vn.edu.iuh.fit.frontend.controllers;
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Controller
+@RequestMapping("/admin")
 public class ProductController {
     @Autowired
     private ProductServices productServices;
@@ -23,9 +25,14 @@ public class ProductController {
     private ProductRepository productRepository;
 
     @GetMapping("/products")
-    public String showCandidateListPaging(Model model,
-                                          @RequestParam("page") Optional<Integer> page,
-                                          @RequestParam("size") Optional<Integer> size) {
+    public String showProductListPaging(
+            HttpSession session,
+            Model model,
+            @RequestParam("page") Optional<Integer> page,
+            @RequestParam("size") Optional<Integer> size) {
+
+        session.setAttribute("sample","this is sample");
+
         int currentPage = page.orElse(1);
         int pageSize = size.orElse(10);
 
@@ -43,12 +50,14 @@ public class ProductController {
         }
         return "admin/product/listing";
     }
-    @GetMapping("/show-add-form")
+
+    @GetMapping("/products/show-add-form")
     public String add(Model model) {
-        Product product =new Product();
-        model.addAttribute("product",product);
+        Product product = new Product();
+        model.addAttribute("product", product);
         return "admin/product/add-form";
     }
+
     @PostMapping("/products/add")
     public String addCandidate(
             @ModelAttribute("product") Product product,
@@ -57,7 +66,7 @@ public class ProductController {
         return "redirect:/products";
     }
 
-//    @DeleteMapping("/products/delete/{id}")
+    //    @DeleteMapping("/products/delete/{id}")
     @GetMapping("/products/delete/{id}")
     public String addCandidate(@PathVariable("id") long id) {
         Product product = productRepository.findById(id).orElse(new Product());

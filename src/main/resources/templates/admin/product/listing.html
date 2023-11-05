@@ -37,7 +37,7 @@
         <th>MANUFACTURER</th>
         <th>STATUS</th>
         <th colspan="2">
-            <a type="button" class="btn btn-success" href="/show-add-form">New Product</a>
+            <a type="button" class="btn btn-success" href="products/show-add-form">New Product</a>
         </th>
     </tr>
     </thead>
@@ -49,8 +49,8 @@
         <td th:text="${product.unit}"></td>
         <td th:text="${product.manufacturer}"></td>
         <td th:text="${product.status}"></td>
-        <td><a class="btn btn-primary" th:href="@{products/show-edit-form/{id}(id=${product.product_id})}">Edit</a></td>
-        <td><a class="btn btn-danger" th:href="@{products/delete/{id}(id=${product.product_id})}">Delete</a></td>
+        <td><a class="btn btn-primary" th:href="@{admin/products/show-edit-form/{id}(id=${product.product_id})}">Edit</a></td>
+        <td><a class="btn btn-danger" th:href="@{admin/products/delete/{id}(id=${product.product_id})}">Delete</a></td>
     </tr>
     </tbody>
 </table>

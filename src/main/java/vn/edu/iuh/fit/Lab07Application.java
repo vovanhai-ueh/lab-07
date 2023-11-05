@@ -26,7 +26,7 @@ public class Lab07Application {
     CommandLineRunner createSampleProducts(){
         return args -> {
             Faker faker =new Faker();
-            Random rnd = new Random();
+//            Random rnd = new Random();
             Device devices = faker.device();
             for (int i = 0; i < 200; i++) {
                 Product product =new Product(
