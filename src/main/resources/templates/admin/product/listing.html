@@ -55,7 +55,7 @@
     </tbody>
 </table>
 <div class="inline" th:if="${productPage.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">
-    <a th:href="@{/products(size=${productPage.size}, page=${pageNumber})}"
+    <a th:href="@{/admin/products(size=${productPage.size}, page=${pageNumber})}"
        th:text="${pageNumber}"
        th:class="${pageNumber==productPage.number + 1} ? active"></a>
 </div>
