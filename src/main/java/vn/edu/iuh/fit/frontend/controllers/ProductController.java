@@ -30,9 +30,6 @@ public class ProductController {
             Model model,
             @RequestParam("page") Optional<Integer> page,
             @RequestParam("size") Optional<Integer> size) {
-
-        session.setAttribute("sample","this is sample");
-
         int currentPage = page.orElse(1);
         int pageSize = size.orElse(10);
 
@@ -63,7 +60,7 @@ public class ProductController {
             @ModelAttribute("product") Product product,
             BindingResult result, Model model) {
         productRepository.save(product);
-        return "redirect:/products";
+        return "redirect:/admin/products";
     }
 
     //    @DeleteMapping("/products/delete/{id}")
@@ -71,7 +68,7 @@ public class ProductController {
     public String addCandidate(@PathVariable("id") long id) {
         Product product = productRepository.findById(id).orElse(new Product());
         productRepository.delete(product);
-        return "redirect:/products";
+        return "redirect:/admin/products";
     }
 
 }
