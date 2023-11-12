@@ -7,13 +7,15 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "product_price")
-@IdClass(ProductPricePK.class)
+//@IdClass(ProductPricePK.class)
 public class ProductPrice {
-    @Id
-    @JoinColumn(name = "product_id")
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long price_id;
+
+    @JoinColumn(name = "product_id",foreignKey = @ForeignKey(name = "pid"))
     @ManyToOne
     private Product product;
-    @Id
+//    @Id
     @Column(name = "price_date_time")
     private LocalDateTime price_date_time;
     @Column(name = "price", nullable = false)
@@ -24,8 +26,7 @@ public class ProductPrice {
     public ProductPrice() {
     }
 
-    public ProductPrice(Product product, LocalDateTime price_date_time, double price, String note) {
-        this.product = product;
+    public ProductPrice(LocalDateTime price_date_time, double price, String note) {
         this.price_date_time = price_date_time;
         this.price = price;
         this.note = note;
