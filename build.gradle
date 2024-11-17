@@ -28,10 +28,12 @@ dependencies {
     implementation 'org.springframework.session:spring-session-core'
     implementation 'org.springframework.session:spring-session-jdbc'
 
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6:3.1.2.RELEASE'
 
-//    implementation 'org.springframework.session:spring-session-jdbc'
+
     implementation 'com.h2database:h2:2.2.224'
-
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
 //    bootstrap
     implementation 'org.webjars:bootstrap:5.3.2'
     implementation 'org.webjars.npm:bootstrap-icons:1.11.1'
